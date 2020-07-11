@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { IonItemSliding, IonItem, IonLabel, IonItemOptions, IonItemOption, AlertButton } from '@ionic/react';
 import { Session } from '../models/Questions';
 
-interface SessionListItemProps {
+interface QuestionListItemProps {
   session: Session;
   listType: "all" | "favorites";
   onAddFavorite: (id: number) => void;
@@ -11,7 +11,7 @@ interface SessionListItemProps {
   isFavorite: boolean;
 }
 
-const SessionListItem: React.FC<SessionListItemProps> = ({ isFavorite, onAddFavorite, onRemoveFavorite, onShowAlert, session, listType }) => {
+const QuestionListItem: React.FC<QuestionListItemProps> = ({ isFavorite, onAddFavorite, onRemoveFavorite, onShowAlert, session, listType }) => {
   const ionItemSlidingRef = useRef<HTMLIonItemSlidingElement>(null)
 
   const dismissAlert = () => {
@@ -79,4 +79,4 @@ const SessionListItem: React.FC<SessionListItemProps> = ({ isFavorite, onAddFavo
   );
 };
 
-export default React.memo(SessionListItem);
+export default React.memo(QuestionListItem);

@@ -1,7 +1,7 @@
 import { IonItemDivider, IonItemGroup, IonLabel, IonList, IonListHeader, IonAlert, AlertButton } from '@ionic/react';
 import React, { useState, useCallback } from 'react';
 import { Questions, Session } from '../models/Questions';
-import SessionListItem from './SessionListItem';
+import QuestionListItem from './QuestionListItem';
 import { connect } from '../data/connect';
 import { addFavorite, removeFavorite } from '../data/sessions/sessions.actions';
 
@@ -20,9 +20,9 @@ interface DispatchProps {
   removeFavorite: typeof removeFavorite;
 }
 
-interface SessionListProps extends OwnProps, StateProps, DispatchProps { };
+interface QuestionListProps extends OwnProps, StateProps, DispatchProps { };
 
-const SessionList: React.FC<SessionListProps> = ({ addFavorite, removeFavorite, favoriteSessions, hide, schedule, listType }) => {
+const QuestionList: React.FC<QuestionListProps> = ({ addFavorite, removeFavorite, favoriteSessions, hide, schedule, listType }) => {
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertHeader, setAlertHeader] = useState('');
@@ -38,7 +38,7 @@ const SessionList: React.FC<SessionListProps> = ({ addFavorite, removeFavorite, 
     return (
       <IonList>
         <IonListHeader>
-          No Sessions Found
+          No questions Found
         </IonListHeader>
       </IonList>
     );
@@ -55,7 +55,7 @@ const SessionList: React.FC<SessionListProps> = ({ addFavorite, removeFavorite, 
               </IonLabel>
             </IonItemDivider>
             {group.sessions.map((session: Session, sessionIndex: number) => (
-              <SessionListItem
+              <QuestionListItem
                 onShowAlert={handleShowAlert}
                 isFavorite={favoriteSessions.indexOf(session.id) > -1}
                 onAddFavorite={addFavorite}
@@ -86,5 +86,5 @@ export default connect<OwnProps, StateProps, DispatchProps>({
     addFavorite,
     removeFavorite
   }),
-  component: SessionList
+  component: QuestionList
 });

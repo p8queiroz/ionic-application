@@ -2,7 +2,7 @@ import React from 'react';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButtons, IonMenuButton, IonGrid, IonRow, IonCol } from '@ionic/react';
 import SpeakerItem from '../components/SpeakerItem';
 import { Speaker } from '../models/Speaker';
-import { Session } from '../models/Schedule';
+import { Session } from '../models/Questions';
 import { connect } from '../data/connect';
 import * as selectors from '../data/selectors';
 import './SpeakerList.scss';
@@ -38,19 +38,19 @@ const SpeakerList: React.FC<SpeakerListProps> = ({ speakers, speakerSessions }) 
           </IonToolbar>
         </IonHeader>
 
-          <IonGrid fixed>
-            <IonRow>
-              {speakers.map(speaker => (
-                <IonCol size="12" size-md="6" key={speaker.id}>
-                  <SpeakerItem
-                    key={speaker.id}
-                    speaker={speaker}
-                    sessions={speakerSessions[speaker.name]}
-                  />
-                </IonCol>
-              ))}
-            </IonRow>
-          </IonGrid>
+        <IonGrid fixed>
+          <IonRow>
+            {speakers.map(speaker => (
+              <IonCol size="12" size-md="6" key={speaker.id}>
+                <SpeakerItem
+                  key={speaker.id}
+                  speaker={speaker}
+                  sessions={speakerSessions[speaker.name]}
+                />
+              </IonCol>
+            ))}
+          </IonRow>
+        </IonGrid>
       </IonContent>
     </IonPage>
   );

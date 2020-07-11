@@ -27,7 +27,7 @@ import { AppContextProvider } from './data/AppContext';
 import { loadConfData } from './data/sessions/sessions.actions';
 import { setIsLoggedIn, setUsername, loadUserData } from './data/user/user.actions';
 
-import { Schedule } from "./models/Schedule";
+import { Questions } from "./models/Questions";
 import RouterApp from './router/RouterApp';
 
 const App: React.FC = () => {
@@ -40,7 +40,7 @@ const App: React.FC = () => {
 
 interface StateProps {
   darkMode: boolean;
-  schedule: Schedule;
+  questions: Questions;
 }
 
 interface DispatchProps {
@@ -52,7 +52,7 @@ interface DispatchProps {
 
 interface IonicAppProps extends StateProps, DispatchProps { }
 
-const IonicApp: React.FC<IonicAppProps> = ({ darkMode, schedule, setIsLoggedIn, setUsername, loadConfData, loadUserData }) => {
+const IonicApp: React.FC<IonicAppProps> = ({ darkMode, questions, setIsLoggedIn, setUsername, loadConfData, loadUserData }) => {
 
   useEffect(() => {
     loadUserData();
@@ -61,7 +61,7 @@ const IonicApp: React.FC<IonicAppProps> = ({ darkMode, schedule, setIsLoggedIn, 
   }, []);
 
   return (
-    schedule.groups.length === 0 ? (
+    questions.groups.length === 0 ? (
       <div></div>
     ) : (
         <IonApp className={`${darkMode ? 'dark-theme' : ''}`}>
@@ -81,7 +81,7 @@ export default App;
 const IonicAppConnected = connect<{}, StateProps, DispatchProps>({
   mapStateToProps: (state) => ({
     darkMode: state.user.darkMode,
-    schedule: state.data.schedule
+    questions: state.data.questions
   }),
   mapDispatchToProps: { loadConfData, loadUserData, setIsLoggedIn, setUsername },
   component: IonicApp

@@ -11,7 +11,7 @@ import './Menu.css'
 
 const routes = {
   appPages: [
-    { title: 'Schedule', path: '/tabs/questions', icon: newspaperOutline },
+    { title: 'Questions', path: '/tabs/questions', icon: newspaperOutline },
     //{ title: 'Speakers', path: '/tabs/speakers', icon: peopleOutline },
     //{ title: 'Map', path: '/tabs/map', icon: mapOutline },
     { title: 'About', path: '/tabs/about', icon: informationCircleOutline }

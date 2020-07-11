@@ -6,7 +6,7 @@ import * as selectors from '../data/selectors';
 import { starOutline, star, share, cloudDownload } from 'ionicons/icons';
 import './SessionDetail.scss';
 import { addFavorite, removeFavorite } from '../data/sessions/sessions.actions';
-import { Session } from '../models/Schedule';
+import { Session } from '../models/Questions';
 
 interface OwnProps extends RouteComponentProps { };
 

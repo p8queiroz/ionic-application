@@ -12,13 +12,13 @@ import ShareSocialFab from '../components/ShareSocialFab';
 import * as selectors from '../data/selectors';
 import { connect } from '../data/connect';
 import { setSearchText } from '../data/sessions/sessions.actions';
-import { Schedule } from '../models/Schedule';
+import { Questions } from '../models/Questions';
 
 interface OwnProps { }
 
 interface StateProps {
-  schedule: Schedule;
-  favoritesSchedule: Schedule;
+  questions: Questions;
+  favoritesSchedule: Questions;
   mode: 'ios' | 'md'
 }
 
@@ -28,7 +28,7 @@ interface DispatchProps {
 
 type QuestionPageProps = OwnProps & StateProps & DispatchProps;
 
-const QuestionPage: React.FC<QuestionPageProps> = ({ favoritesSchedule, schedule, setSearchText, mode }) => {
+const QuestionPage: React.FC<QuestionPageProps> = ({ favoritesSchedule, questions, setSearchText, mode }) => {
   const [segment, setSegment] = useState<'all' | 'favorites'>('all');
   const [showSearchbar, setShowSearchbar] = useState<boolean>(false);
   const [showFilterModal, setShowFilterModal] = useState(false);
@@ -122,7 +122,7 @@ const QuestionPage: React.FC<QuestionPageProps> = ({ favoritesSchedule, schedule
         />
 
         <SessionList
-          schedule={schedule}
+          schedule={questions}
           listType={segment}
           hide={segment === 'favorites'}
         />
@@ -154,7 +154,7 @@ const QuestionPage: React.FC<QuestionPageProps> = ({ favoritesSchedule, schedule
 
 export default connect<OwnProps, StateProps, DispatchProps>({
   mapStateToProps: (state) => ({
-    schedule: selectors.getSearchedSchedule(state),
+    questions: selectors.getSearchedSchedule(state),
     favoritesSchedule: selectors.getGroupedFavorites(state),
     mode: getConfig()!.get('mode')
   }),

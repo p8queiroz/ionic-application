@@ -1,5 +1,5 @@
 import { Plugins } from '@capacitor/core';
-import { Schedule, Session } from '../models/Schedule';
+import { Questions, Session } from '../models/Questions';
 import { Speaker } from '../models/Speaker';
 import { Location } from '../models/Location';
 
@@ -22,8 +22,8 @@ export const getConfData = async () => {
     fetch(dataUrl),
     fetch(locationsUrl)]);
   const responseData = await response[0].json();
-  const schedule = responseData.schedule[0] as Schedule;
-  const sessions = parseSessions(schedule);
+  const questions = responseData.questions[0] as Questions;
+  const sessions = parseSessions(questions);
   const speakers = responseData.speakers as Speaker[];
   const locations = await response[1].json() as Location[];
   const allTracks = sessions
@@ -32,7 +32,7 @@ export const getConfData = async () => {
     .sort();
 
   const data = {
-    schedule,
+    questions,
     sessions,
     locations,
     speakers,
@@ -82,7 +82,7 @@ export const setLogarUsuarioData = async (userName: string, password: string) =>
   return responseData;
 }
 
-function parseSessions(schedule: Schedule) {
+function parseSessions(schedule: Questions) {
   const sessions: Session[] = [];
   schedule.groups.forEach(g => {
     g.sessions.forEach(s => sessions.push(s))
