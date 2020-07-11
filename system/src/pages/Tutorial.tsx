@@ -7,7 +7,7 @@ import './Tutorial.scss';
 import { connect } from '../data/connect';
 import { RouteComponentProps } from 'react-router';
 
-interface OwnProps extends RouteComponentProps {};
+interface OwnProps extends RouteComponentProps { };
 
 interface DispatchProps {
   setHasSeenTutorial: typeof setHasSeenTutorial;
@@ -23,14 +23,14 @@ const Tutorial: React.FC<TutorialProps> = ({ history, setHasSeenTutorial, setMen
   useIonViewWillEnter(() => {
     setMenuEnabled(false);
   });
-  
-  const startApp = async () => { 
+
+  const startApp = async () => {
     await setHasSeenTutorial(true);
     await setMenuEnabled(true);
-    history.push('/tabs/schedule', { direction: 'none' });
+    history.push('/tabs/questions', { direction: 'none' });
   };
 
-  const handleSlideChangeStart = () => { 
+  const handleSlideChangeStart = () => {
     slideRef.current!.isEnd().then(isEnd => setShowSkip(!isEnd));
   };
 

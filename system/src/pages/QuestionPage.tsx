@@ -5,7 +5,7 @@ import { options, search } from 'ionicons/icons';
 
 import SessionList from '../components/SessionList';
 import SessionListFilter from '../components/SessionListFilter';
-import './SchedulePage.scss'
+import './QuestionPage.scss'
 
 import ShareSocialFab from '../components/ShareSocialFab';
 
@@ -26,9 +26,9 @@ interface DispatchProps {
   setSearchText: typeof setSearchText;
 }
 
-type SchedulePageProps = OwnProps & StateProps & DispatchProps;
+type QuestionPageProps = OwnProps & StateProps & DispatchProps;
 
-const SchedulePage: React.FC<SchedulePageProps> = ({ favoritesSchedule, schedule, setSearchText, mode }) => {
+const QuestionPage: React.FC<QuestionPageProps> = ({ favoritesSchedule, schedule, setSearchText, mode }) => {
   const [segment, setSegment] = useState<'all' | 'favorites'>('all');
   const [showSearchbar, setShowSearchbar] = useState<boolean>(false);
   const [showFilterModal, setShowFilterModal] = useState(false);
@@ -47,7 +47,7 @@ const SchedulePage: React.FC<SchedulePageProps> = ({ favoritesSchedule, schedule
   };
 
   return (
-    <IonPage ref={pageRef} id="schedule-page">
+    <IonPage ref={pageRef} id="question-page">
       <IonHeader translucent={true}>
         <IonToolbar>
           {!showSearchbar &&
@@ -66,7 +66,7 @@ const SchedulePage: React.FC<SchedulePageProps> = ({ favoritesSchedule, schedule
             </IonSegment>
           }
           {!ios && !showSearchbar &&
-            <IonTitle>Schedule</IonTitle>
+            <IonTitle>Questions</IonTitle>
           }
           {showSearchbar &&
             <IonSearchbar showCancelButton="always" placeholder="Search" onIonChange={(e: CustomEvent) => setSearchText(e.detail.value)} onIonCancel={() => setShowSearchbar(false)}></IonSearchbar>
@@ -103,7 +103,7 @@ const SchedulePage: React.FC<SchedulePageProps> = ({ favoritesSchedule, schedule
       <IonContent fullscreen={true}>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Schedule</IonTitle>
+            <IonTitle size="large">Questions</IonTitle>
           </IonToolbar>
           <IonToolbar>
             <IonSearchbar placeholder="Search" onIonChange={(e: CustomEvent) => setSearchText(e.detail.value)}></IonSearchbar>
@@ -161,5 +161,5 @@ export default connect<OwnProps, StateProps, DispatchProps>({
   mapDispatchToProps: {
     setSearchText
   },
-  component: React.memo(SchedulePage)
+  component: React.memo(QuestionPage)
 });
