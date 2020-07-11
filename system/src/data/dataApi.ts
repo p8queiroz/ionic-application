@@ -12,6 +12,11 @@ const HAS_LOGGED_IN = 'hasLoggedIn';
 const HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
 const USERNAME = 'username';
 
+const requestInit = {
+  method: 'POST',
+}
+
+
 export const getConfData = async () => {
   const response = await Promise.all([
     fetch(dataUrl),
@@ -67,6 +72,14 @@ export const setUsernameData = async (username?: string) => {
   } else {
     await Storage.set({ key: USERNAME, value: username });
   }
+}
+
+export const setLogarUsuarioData = async (userName: string, password: string) => {
+  const login = `http://quizzertech.com/system/wp-json/jwt-auth/v1/token?username=${userName}&password=${password}`;
+  const response = await Promise.all([
+    fetch(login, requestInit)]);
+  const responseData = await response[0].json();
+  return responseData;
 }
 
 function parseSessions(schedule: Schedule) {
