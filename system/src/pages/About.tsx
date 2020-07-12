@@ -70,7 +70,7 @@ const About: React.FC<AboutProps> = () => {
 
           </p>
 
-          <h3 className="ion-padding-top ion-padding-start">Details</h3>
+          {/*<h3 className="ion-padding-top ion-padding-start">Details</h3>
 
           <IonList lines="none">
             <IonItem>
@@ -116,7 +116,7 @@ const About: React.FC<AboutProps> = () => {
                 makegoodthings
               </IonLabel>
             </IonItem>
-          </IonList>
+          </IonList>*/}
 
         </div>
       </IonContent>
