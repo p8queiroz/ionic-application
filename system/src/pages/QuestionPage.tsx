@@ -12,13 +12,13 @@ import ShareSocialFab from '../components/ShareSocialFab';
 import * as selectors from '../data/selectors';
 import { connect } from '../data/connect';
 import { setSearchText } from '../data/sessions/sessions.actions';
-import { Questions } from '../models/Questions';
+import { Question } from '../models/Questions';
 
 interface OwnProps { }
 
 interface StateProps {
-  questions: Questions;
-  favoritesSchedule: Questions;
+  questions: Question[];
+  favoritesQuestions: Question[];
   mode: 'ios' | 'md'
 }
 
@@ -28,7 +28,7 @@ interface DispatchProps {
 
 type QuestionPageProps = OwnProps & StateProps & DispatchProps;
 
-const QuestionPage: React.FC<QuestionPageProps> = ({ favoritesSchedule, questions, setSearchText, mode }) => {
+const QuestionPage: React.FC<QuestionPageProps> = ({ favoritesQuestions, questions, setSearchText, mode }) => {
   const [segment, setSegment] = useState<'all' | 'favorites'>('all');
   const [showSearchbar, setShowSearchbar] = useState<boolean>(false);
   const [showFilterModal, setShowFilterModal] = useState(false);
@@ -122,13 +122,13 @@ const QuestionPage: React.FC<QuestionPageProps> = ({ favoritesSchedule, question
         />
 
         <SessionList
-          schedule={questions}
+          questions={questions}
           listType={segment}
           hide={segment === 'favorites'}
         />
         <SessionList
           // schedule={schedule}
-          schedule={favoritesSchedule}
+          questions={favoritesQuestions}
           listType={segment}
           hide={segment === 'all'}
         />
@@ -154,8 +154,8 @@ const QuestionPage: React.FC<QuestionPageProps> = ({ favoritesSchedule, question
 
 export default connect<OwnProps, StateProps, DispatchProps>({
   mapStateToProps: (state) => ({
-    questions: selectors.getSearchedSchedule(state),
-    favoritesSchedule: selectors.getGroupedFavorites(state),
+    questions: selectors.getSearchedQuestions(state),
+    favoritesQuestions: selectors.favoritesQuestions(state),
     mode: getConfig()!.get('mode')
   }),
   mapDispatchToProps: {

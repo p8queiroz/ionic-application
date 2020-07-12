@@ -4,7 +4,7 @@ import { userReducer } from './user/user.reducer';
 
 export const initialState: AppState = {
   data: {
-    questions: { groups: [] } as any,
+    questions: [],
     sessions: [],
     speakers: [],
     favorites: [],

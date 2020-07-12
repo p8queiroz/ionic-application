@@ -1,12 +1,12 @@
 import { IonItemDivider, IonItemGroup, IonLabel, IonList, IonListHeader, IonAlert, AlertButton } from '@ionic/react';
 import React, { useState, useCallback } from 'react';
-import { Questions, Session } from '../models/Questions';
+import { Question } from '../models/Questions';
 import SessionListItem from './SessionListItem';
 import { connect } from '../data/connect';
 import { addFavorite, removeFavorite } from '../data/sessions/sessions.actions';
 
 interface OwnProps {
-  schedule: Questions;
+  questions: Question[];
   listType: 'all' | 'favorites';
   hide: boolean;
 }
@@ -22,7 +22,7 @@ interface DispatchProps {
 
 interface SessionListProps extends OwnProps, StateProps, DispatchProps { };
 
-const SessionList: React.FC<SessionListProps> = ({ addFavorite, removeFavorite, favoriteSessions, hide, schedule, listType }) => {
+const SessionList: React.FC<SessionListProps> = ({ addFavorite, removeFavorite, favoriteSessions, hide, questions, listType }) => {
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertHeader, setAlertHeader] = useState('');
@@ -34,11 +34,11 @@ const SessionList: React.FC<SessionListProps> = ({ addFavorite, removeFavorite, 
     setShowAlert(true);
   }, []);
 
-  if (schedule.groups.length === 0 && !hide) {
+  if (questions.length === 0 && !hide) {
     return (
       <IonList>
         <IonListHeader>
-          No Sessions Found
+          No questions Found
         </IonListHeader>
       </IonList>
     );
@@ -47,26 +47,26 @@ const SessionList: React.FC<SessionListProps> = ({ addFavorite, removeFavorite, 
   return (
     <>
       <IonList style={hide ? { display: 'none' } : {}}>
-        {schedule.groups.map((group, index: number) => (
-          <IonItemGroup key={`group-${index}`}>
-            <IonItemDivider sticky>
-              <IonLabel>
-                {group.time}
-              </IonLabel>
-            </IonItemDivider>
-            {group.sessions.map((session: Session, sessionIndex: number) => (
-              <SessionListItem
-                onShowAlert={handleShowAlert}
-                isFavorite={favoriteSessions.indexOf(session.id) > -1}
-                onAddFavorite={addFavorite}
-                onRemoveFavorite={removeFavorite}
-                key={`group-${index}-${sessionIndex}`}
-                session={session}
-                listType={listType}
-              />
-            ))}
-          </IonItemGroup>
-        ))}
+
+        <IonItemGroup key={`question----`}>
+          <IonItemDivider sticky>
+            <IonLabel>
+              Quizzer App
+            </IonLabel>
+          </IonItemDivider>
+          {questions.map((question: Question, questionIndex: number) => (
+            <SessionListItem
+              onShowAlert={handleShowAlert}
+              isFavorite={favoriteSessions.indexOf(question.id) > -1}
+              onAddFavorite={addFavorite}
+              onRemoveFavorite={removeFavorite}
+              key={`question-${questionIndex}`}
+              question={question}
+              listType={listType}
+            />
+          ))}
+        </IonItemGroup>
+
       </IonList>
       <IonAlert
         isOpen={showAlert}

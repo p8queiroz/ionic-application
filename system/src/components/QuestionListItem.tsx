@@ -1,17 +1,17 @@
 import React, { useRef } from 'react';
 import { IonItemSliding, IonItem, IonLabel, IonItemOptions, IonItemOption, AlertButton } from '@ionic/react';
-import { Session } from '../models/Questions';
+import { Question } from '../models/Questions';
 
 interface QuestionListItemProps {
-  session: Session;
   listType: "all" | "favorites";
+  question: Question,
   onAddFavorite: (id: number) => void;
   onRemoveFavorite: (id: number) => void;
   onShowAlert: (header: string, buttons: AlertButton[]) => void;
   isFavorite: boolean;
 }
 
-const QuestionListItem: React.FC<QuestionListItemProps> = ({ isFavorite, onAddFavorite, onRemoveFavorite, onShowAlert, session, listType }) => {
+const QuestionListItem: React.FC<QuestionListItemProps> = ({ isFavorite, question, onAddFavorite, onRemoveFavorite, onShowAlert, listType }) => {
   const ionItemSlidingRef = useRef<HTMLIonItemSlidingElement>(null)
 
   const dismissAlert = () => {
@@ -19,7 +19,7 @@ const QuestionListItem: React.FC<QuestionListItemProps> = ({ isFavorite, onAddFa
   }
 
   const removeFavoriteSession = () => {
-    onAddFavorite(session.id);
+    onAddFavorite(question.id);
     onShowAlert('Favorite already added', [
       {
         text: 'Cancel',
@@ -28,7 +28,7 @@ const QuestionListItem: React.FC<QuestionListItemProps> = ({ isFavorite, onAddFa
       {
         text: 'Remove',
         handler: () => {
-          onRemoveFavorite(session.id);
+          onRemoveFavorite(question.id);
           dismissAlert();
         }
       }
@@ -42,7 +42,7 @@ const QuestionListItem: React.FC<QuestionListItemProps> = ({ isFavorite, onAddFa
       removeFavoriteSession();
     } else {
       // remember this session as a user favorite
-      onAddFavorite(session.id);
+      onAddFavorite(question.id);
       onShowAlert('Favorite Added', [
         {
           text: 'OK',
@@ -53,14 +53,12 @@ const QuestionListItem: React.FC<QuestionListItemProps> = ({ isFavorite, onAddFa
   };
 
   return (
-    <IonItemSliding ref={ionItemSlidingRef} class={'track-' + session.tracks[0].toLowerCase()}>
-      <IonItem routerLink={`/tabs/questions/${session.id}`}>
+    <IonItemSliding ref={ionItemSlidingRef} class={'track-' + question.technology.toLowerCase()}>
+      <IonItem routerLink={`/tabs/questions/${question.id}`}>
         <IonLabel>
-          <h3>{session.name}</h3>
+          <h3>{question.description}</h3>
           <p>
-            {session.timeStart}&mdash;&nbsp;
-            {session.timeStart}&mdash;&nbsp;
-            {session.location}
+            {question.answer}
           </p>
         </IonLabel>
       </IonItem>

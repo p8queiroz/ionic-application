@@ -6,13 +6,13 @@ import * as selectors from '../data/selectors';
 import { starOutline, star, share, cloudDownload } from 'ionicons/icons';
 import './SessionDetail.scss';
 import { addFavorite, removeFavorite } from '../data/sessions/sessions.actions';
-import { Session } from '../models/Questions';
+import { Question } from '../models/Questions';
 
 interface OwnProps extends RouteComponentProps { };
 
 interface StateProps {
-  session?: Session;
-  favoriteSessions: number[],
+  question?: Question;
+  favoriteQuestions: number[],
 };
 
 interface DispatchProps {
@@ -22,17 +22,30 @@ interface DispatchProps {
 
 type SessionDetailProps = OwnProps & StateProps & DispatchProps;
 
-const SessionDetail: React.FC<SessionDetailProps> = ({ session, addFavorite, removeFavorite, favoriteSessions }) => {
+const SessionDetail: React.FC<SessionDetailProps> = ({ question, addFavorite, removeFavorite, favoriteQuestions }) => {
 
-  if (!session) {
-    return <div>Session not found</div>
+  if (!question) {
+    return <div>Question not found</div>
   }
 
-  const isFavorite = favoriteSessions.indexOf(session.id) > -1;
+  const isFavorite = favoriteQuestions.indexOf(question.id) > -1;
 
   const toggleFavorite = () => {
-    isFavorite ? removeFavorite(session.id) : addFavorite(session.id);
+    isFavorite ? removeFavorite(question.id) : addFavorite(question.id);
   };
+
+  const descriptiontechnology = () => {
+    return { __html: question.technology };
+  }
+
+  const descriptionhtml = () => {
+    return { __html: question.description };
+  }
+
+  const answerhtml = () => {
+    return { __html: question.answer };
+  }
+
   const shareSession = () => { };
   const sessionClick = (text: string) => {
     console.log(`Clicked ${text}`);
@@ -60,16 +73,14 @@ const SessionDetail: React.FC<SessionDetailProps> = ({ session, addFavorite, rem
       </IonHeader>
       <IonContent>
         <div className="ion-padding">
-          <h1>{session.name}</h1>
-          {session.tracks.map(track => (
-            <span key={track} className={`session-track-${track.toLowerCase()}`}>{track}</span>
-          ))}
-          <p>{session.description}</p>
-          <IonText color="medium">
+          <IonLabel color="primary">  <span dangerouslySetInnerHTML={descriptiontechnology()}></span></IonLabel><br />
+          <h5 dangerouslySetInnerHTML={descriptionhtml()}></h5>
+          <p dangerouslySetInnerHTML={answerhtml()}></p>
+          {/*<IonText color="medium">
             {session.timeStart} &ndash; {session.timeEnd}
             <br />
             {session.location}
-          </IonText>
+          </IonText>*/}
         </div>
         <IonList>
           <IonItem onClick={() => sessionClick('watch')} button>
@@ -96,8 +107,8 @@ const SessionDetail: React.FC<SessionDetailProps> = ({ session, addFavorite, rem
 
 export default connect<OwnProps, StateProps, DispatchProps>({
   mapStateToProps: (state, OwnProps) => ({
-    session: selectors.getSession(state, OwnProps),
-    favoriteSessions: state.data.favorites
+    question: selectors.getQuestion(state, OwnProps),
+    favoriteQuestions: state.data.favorites
   }),
   mapDispatchToProps: {
     addFavorite,

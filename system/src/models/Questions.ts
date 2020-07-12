@@ -1,6 +1,11 @@
-export interface Questions {
-  date: string;
-  groups: ScheduleGroup[]
+export interface Question {
+  id: number;
+  answer: string;
+  description: string;
+  isActive: string;
+  level: string;
+  picture: string;
+  technology: string;
 }
 
 export interface ScheduleGroup {

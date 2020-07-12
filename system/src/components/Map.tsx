@@ -11,7 +11,7 @@ const Map: React.FC<MapProps> = ({ mapCenter, locations }) => {
   const map = useRef<google.maps.Map>();
 
   useEffect(() => {
-
+    if (!mapEle.current) return
     map.current = new google.maps.Map(mapEle.current, {
       center: {
         lat: mapCenter.lat,
@@ -33,13 +33,13 @@ const Map: React.FC<MapProps> = ({ mapCenter, locations }) => {
         let infoWindow = new google.maps.InfoWindow({
           content: `<h5>${markerData.name}</h5>`
         });
-  
+
         let marker = new google.maps.Marker({
           position: new google.maps.LatLng(markerData.lat, markerData.lng),
           map: map.current!,
           title: markerData.name
         });
-  
+
         marker.addListener('click', () => {
           infoWindow.open(map.current!, marker);
         });

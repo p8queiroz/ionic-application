@@ -49,27 +49,25 @@ const Tutorial: React.FC<TutorialProps> = ({ history, setHasSeenTutorial, setMen
           <IonSlide>
             <img src="assets/img/ica-slidebox-img-1.png" alt="" className="slide-image" />
             <h2 className="slide-title">
-              Welcome to <b>ICA</b>
+              Welcome to <b>Quizzer App</b>
             </h2>
             <p>
-              The <b>ionic conference app</b> is a practical preview of the ionic framework in action, and a demonstration of proper code use.
+              The <b>Quizzer App</b> is a practical questions/answers for IT people .
             </p>
           </IonSlide>
 
           <IonSlide>
             <img src="assets/img/ica-slidebox-img-2.png" alt="" className="slide-image" />
-            <h2 className="slide-title">What is Ionic?</h2>
+            <h2 className="slide-title">How does it work?</h2>
             <p>
-              <b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.
-            </p>
+              <b>Quizzer App </b> is an open source and easy-to-use app. You access the main page, check the questions of the tech you like most and check the answers!           </p>
           </IonSlide>
 
           <IonSlide>
             <img src="assets/img/ica-slidebox-img-3.png" alt="" className="slide-image" />
-            <h2 className="slide-title">What is Ionic Appflow?</h2>
+            <h2 className="slide-title">Should I need to creat an account?</h2>
             <p>
-              <b>Ionic Appflow</b> is a powerful set of services and features built on top of Ionic Framework that brings a totally new level of app development agility to mobile dev teams.
-            </p>
+              <b>No!</b> You can have access to all questions with no need to log in. For some features like fav a question you need to be logged in tho    </p>
           </IonSlide>
 
           <IonSlide>

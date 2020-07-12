@@ -1,6 +1,6 @@
 import { Plugins } from '@capacitor/core';
-import { Questions, Session } from '../models/Questions';
-import { Speaker } from '../models/Speaker';
+import { Question } from '../models/Questions';
+//import { Speaker } from '../models/Speaker';
 import { Location } from '../models/Location';
 
 const { Storage } = Plugins;
@@ -17,28 +17,41 @@ const requestInit = {
 }
 
 
+export const getQuestions = async () => {
+  const getQuestionsURL = `http://quizzertech.com/system/wp-json/application-api/v1/om-question`;
+  return fetch(getQuestionsURL);
+}
+
 export const getConfData = async () => {
   const response = await Promise.all([
     fetch(dataUrl),
-    fetch(locationsUrl)]);
+    fetch(locationsUrl),
+    getQuestions(),
+  ]);
   const responseData = await response[0].json();
-  const questions = responseData.questions[0] as Questions;
-  const sessions = parseSessions(questions);
-  const speakers = responseData.speakers as Speaker[];
+  const responseDataQuestions = await response[2].json();
+
+  //const questions = responseData.questions[0] as Questions;
+  const questions = responseDataQuestions as Question[];
+
+  //const sessions = parseSessions(questions);
+  //const speakers = responseData.speakers as Speaker[];
   const locations = await response[1].json() as Location[];
-  const allTracks = sessions
+
+  /*const allTracks = sessions
     .reduce((all, session) => all.concat(session.tracks), [] as string[])
     .filter((trackName, index, array) => array.indexOf(trackName) === index)
-    .sort();
+    .sort();*/
 
   const data = {
     questions,
-    sessions,
+    // sessions,
     locations,
-    speakers,
-    allTracks,
-    filteredTracks: [...allTracks]
+    //  speakers,
+    // allTracks,
+    // filteredTracks: [...allTracks]
   }
+
   return data;
 }
 
@@ -82,10 +95,11 @@ export const setLogarUsuarioData = async (userName: string, password: string) =>
   return responseData;
 }
 
-function parseSessions(schedule: Questions) {
-  const sessions: Session[] = [];
+/*
+function parseSessions(schedule: Question) {
+const sessions: Session[] = [];
   schedule.groups.forEach(g => {
     g.sessions.forEach(s => sessions.push(s))
   });
   return sessions;
-}
+}*/

@@ -1,9 +1,8 @@
 import { createSelector } from 'reselect';
-import { Questions, Session, ScheduleGroup } from '../models/Questions';
+import { Question, Session, ScheduleGroup } from '../models/Questions';
 import { AppState } from './state';
 
-const getSchedule = (state: AppState) => {
-
+const getQuestions = (state: AppState) => {
   return state.data.questions
 };
 export const getSpeakers = (state: AppState) => state.data.speakers;
@@ -12,11 +11,76 @@ const getFilteredTracks = (state: AppState) => state.data.filteredTracks;
 const getFavoriteIds = (state: AppState) => state.data.favorites;
 const getSearchText = (state: AppState) => state.data.searchText;
 
+const getIdParam = (_state: AppState, props: any) => {
+  return props.match.params['id'];
+}
+
+
+export const getQuestion = createSelector(
+  getQuestions, getIdParam,
+  (questions, id) => {
+    return questions.find(s => s.id == id);
+  }
+);
+
+
+export const getFilteredQuestions = createSelector(
+  getQuestions, getFilteredTracks,
+  (questions, filteredTracks) => {
+    const groups: ScheduleGroup[] = [];
+
+    //
+
+    return questions;
+  }
+);
+
+export const getSearchedQuestions = createSelector(
+  getFilteredQuestions, getSearchText,
+  (questions, searchText) => {
+    if (!searchText) {
+      return questions;
+    }
+    return questions;
+  }
+)
+
+
+
+export const getQuestionList = createSelector(
+  getSearchedQuestions,
+  (questions) => questions
+);
+
+export const favoritesQuestions = createSelector(
+  getQuestionList, getFavoriteIds,
+  (questions, favoriteIds) => {
+
+    return questions;
+  }
+);
+
+
+export const mapCenter = (state: AppState) => {
+  const item = state.data.locations.find(l => l.id === state.data.mapCenterId);
+  if (item == null) {
+    return {
+      id: 1,
+      name: 'Map Center',
+      lat: 43.071584,
+      lng: -89.380120
+    };
+  }
+  return item;
+}
+
+
+/*
 export const getFilteredSchedule = createSelector(
   getSchedule, getFilteredTracks,
   (questions, filteredTracks) => {
     const groups: ScheduleGroup[] = [];
-    questions.groups.forEach(group => {
+    questions.forEach(group => {
       const sessions: Session[] = [];
       group.sessions.forEach(session => {
         session.tracks.forEach(track => {
@@ -62,7 +126,7 @@ export const getSearchedSchedule = createSelector(
     return {
       date: questions.date,
       groups
-    } as Questions;
+    } as Question;
   }
 )
 
@@ -88,7 +152,7 @@ export const getGroupedFavorites = createSelector(
     return {
       date: questions.date,
       groups
-    } as Questions;
+    } as Question;
   }
 );
 
@@ -139,3 +203,4 @@ export const mapCenter = (state: AppState) => {
   }
   return item;
 }
+*/

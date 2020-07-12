@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { IonItemSliding, IonItem, IonLabel, IonItemOptions, IonItemOption, AlertButton } from '@ionic/react';
-import { Session } from '../models/Questions';
+import { IonItemSliding, IonItem, IonLabel, IonItemOptions, IonItemOption, AlertButton, IonNote } from '@ionic/react';
+import { Question } from '../models/Questions';
 
 interface SessionListItemProps {
-  session: Session;
+  question: Question;
   listType: "all" | "favorites";
   onAddFavorite: (id: number) => void;
   onRemoveFavorite: (id: number) => void;
@@ -11,7 +11,7 @@ interface SessionListItemProps {
   isFavorite: boolean;
 }
 
-const SessionListItem: React.FC<SessionListItemProps> = ({ isFavorite, onAddFavorite, onRemoveFavorite, onShowAlert, session, listType }) => {
+const SessionListItem: React.FC<SessionListItemProps> = ({ isFavorite, onAddFavorite, onRemoveFavorite, onShowAlert, question, listType }) => {
   const ionItemSlidingRef = useRef<HTMLIonItemSlidingElement>(null)
 
   const dismissAlert = () => {
@@ -19,7 +19,7 @@ const SessionListItem: React.FC<SessionListItemProps> = ({ isFavorite, onAddFavo
   }
 
   const removeFavoriteSession = () => {
-    onAddFavorite(session.id);
+    onAddFavorite(question.id);
     onShowAlert('Favorite already added', [
       {
         text: 'Cancel',
@@ -28,7 +28,7 @@ const SessionListItem: React.FC<SessionListItemProps> = ({ isFavorite, onAddFavo
       {
         text: 'Remove',
         handler: () => {
-          onRemoveFavorite(session.id);
+          onRemoveFavorite(question.id);
           dismissAlert();
         }
       }
@@ -42,7 +42,7 @@ const SessionListItem: React.FC<SessionListItemProps> = ({ isFavorite, onAddFavo
       removeFavoriteSession();
     } else {
       // remember this session as a user favorite
-      onAddFavorite(session.id);
+      onAddFavorite(question.id);
       onShowAlert('Favorite Added', [
         {
           text: 'OK',
@@ -52,17 +52,17 @@ const SessionListItem: React.FC<SessionListItemProps> = ({ isFavorite, onAddFavo
     }
   };
 
+  const descriptionhtml = () => {
+    return { __html: question.description };
+  }
+
+
   return (
-    <IonItemSliding ref={ionItemSlidingRef} class={'track-' + session.tracks[0].toLowerCase()}>
-      <IonItem routerLink={`/tabs/questions/${session.id}`}>
-        <IonLabel>
-          <h3>{session.name}</h3>
-          <p>
-            {session.timeStart}&mdash;&nbsp;
-            {session.timeStart}&mdash;&nbsp;
-            {session.location}
-          </p>
-        </IonLabel>
+    <IonItemSliding ref={ionItemSlidingRef} class={'question-' + question.id.toString()}>
+      <IonItem routerLink={`/tabs/questions/${question.id}`}>
+        <IonNote>
+          <p dangerouslySetInnerHTML={descriptionhtml()}></p>
+        </IonNote>
       </IonItem>
       <IonItemOptions>
         {listType === "favorites" ?

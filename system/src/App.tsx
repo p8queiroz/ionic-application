@@ -27,7 +27,7 @@ import { AppContextProvider } from './data/AppContext';
 import { loadConfData } from './data/sessions/sessions.actions';
 import { setIsLoggedIn, setUsername, loadUserData } from './data/user/user.actions';
 
-import { Questions } from "./models/Questions";
+import { Question } from "./models/Questions";
 import RouterApp from './router/RouterApp';
 
 const App: React.FC = () => {
@@ -40,7 +40,7 @@ const App: React.FC = () => {
 
 interface StateProps {
   darkMode: boolean;
-  questions: Questions;
+  questions: Question[];
 }
 
 interface DispatchProps {
@@ -61,7 +61,7 @@ const IonicApp: React.FC<IonicAppProps> = ({ darkMode, questions, setIsLoggedIn,
   }, []);
 
   return (
-    questions.groups.length === 0 ? (
+    questions.length === 0 ? (
       <div></div>
     ) : (
         <IonApp className={`${darkMode ? 'dark-theme' : ''}`}>

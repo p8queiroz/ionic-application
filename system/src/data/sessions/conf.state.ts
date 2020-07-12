@@ -1,9 +1,9 @@
 import { Location } from '../../models/Location';
 import { Speaker } from '../../models/Speaker';
-import { Questions, Session } from '../../models/Questions';
+import { Question, Session } from '../../models/Questions';
 
 export interface ConfState {
-  questions: Questions;
+  questions: Question[];
   sessions: Session[];
   speakers: Speaker[];
   favorites: number[];
