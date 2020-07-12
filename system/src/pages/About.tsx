@@ -66,7 +66,7 @@ const About: React.FC<AboutProps> = () => {
           <h3 className="ion-padding-top ion-padding-start">About</h3>
 
           <p className="ion-padding-start ion-padding-end">
-            Quizzer App {displayDate(conferenceDate, 'mediumDate')} Interview Questions Every JavaScript | React | .Net Developer Should Know!
+            Quizzer App: {/*displayDate(conferenceDate, 'mediumDate')*/} Interview Questions Every JavaScript | React | .Net Developer Should Know!
 
           </p>
 
