@@ -3,7 +3,7 @@ import React, { useState, useCallback } from 'react';
 import { Question } from '../models/Questions';
 import QuestionListItem from './TestListItem';
 import { connect } from '../data/connect';
-import { addFavorite, removeFavorite } from '../data/sessions/sessions.actions';
+import { addFavorite, removeFavorite } from '../data/questions/questions.actions';
 
 interface OwnProps {
   questions: Question[];

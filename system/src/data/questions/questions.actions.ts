@@ -1,6 +1,6 @@
 import { getConfData } from '../dataApi';
 import { ActionType } from '../../util/types';
-import { ConfState } from './conf.state';
+import { ConfState } from './questions.state';
 
 export const loadConfData = () => async (dispatch: React.Dispatch<any>) => {
   dispatch(setLoading(true));
@@ -30,17 +30,17 @@ export const removeFavorite = (sessionId: number) => ({
 } as const);
 
 export const updateFilteredTracks = (filteredTracks: string[]) => ({
-  type: 'update-filtered-tracks', 
-  filteredTracks 
+  type: 'update-filtered-tracks',
+  filteredTracks
 } as const);
 
-export const setSearchText = (searchText?: string) => ({ 
-  type: 'set-search-text', 
-  searchText 
+export const setSearchText = (searchText?: string) => ({
+  type: 'set-search-text',
+  searchText
 } as const);
 
-export const setMenuEnabled = (menuEnabled: boolean) => ({ 
-  type: 'set-menu-enabled', 
+export const setMenuEnabled = (menuEnabled: boolean) => ({
+  type: 'set-menu-enabled',
   menuEnabled
 } as const);
 

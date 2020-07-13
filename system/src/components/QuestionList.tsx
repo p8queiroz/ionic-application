@@ -1,9 +1,9 @@
 import { IonItemDivider, IonItemGroup, IonLabel, IonList, IonListHeader, IonAlert, AlertButton } from '@ionic/react';
 import React, { useState, useCallback } from 'react';
 import { Question } from '../models/Questions';
-import SessionListItem from './SessionListItem';
+import QuestionListItem from "./QuestionListItem";
 import { connect } from '../data/connect';
-import { addFavorite, removeFavorite } from '../data/sessions/sessions.actions';
+import { addFavorite, removeFavorite } from '../data/questions/questions.actions';
 
 interface OwnProps {
   questions: Question[];
@@ -12,7 +12,7 @@ interface OwnProps {
 }
 
 interface StateProps {
-  favoriteSessions: number[];
+  favoriteQuestions: number[];
 }
 
 interface DispatchProps {
@@ -20,9 +20,9 @@ interface DispatchProps {
   removeFavorite: typeof removeFavorite;
 }
 
-interface SessionListProps extends OwnProps, StateProps, DispatchProps { };
+interface QuestionListProps extends OwnProps, StateProps, DispatchProps { };
 
-const SessionList: React.FC<SessionListProps> = ({ addFavorite, removeFavorite, favoriteSessions, hide, questions, listType }) => {
+const QuestionList: React.FC<QuestionListProps> = ({ addFavorite, removeFavorite, favoriteQuestions, hide, questions, listType }) => {
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertHeader, setAlertHeader] = useState('');
@@ -47,17 +47,16 @@ const SessionList: React.FC<SessionListProps> = ({ addFavorite, removeFavorite, 
   return (
     <>
       <IonList style={hide ? { display: 'none' } : {}}>
-
-        <IonItemGroup key={`question----`}>
+        <IonItemGroup>
           <IonItemDivider sticky>
             <IonLabel>
-              Quizzer App
+              Quizzer App_
             </IonLabel>
           </IonItemDivider>
           {questions.map((question: Question, questionIndex: number) => (
-            <SessionListItem
+            <QuestionListItem
               onShowAlert={handleShowAlert}
-              isFavorite={favoriteSessions.indexOf(question.id) > -1}
+              isFavorite={favoriteQuestions.indexOf(question.id) > -1}
               onAddFavorite={addFavorite}
               onRemoveFavorite={removeFavorite}
               key={`question-${questionIndex}`}
@@ -80,11 +79,11 @@ const SessionList: React.FC<SessionListProps> = ({ addFavorite, removeFavorite, 
 
 export default connect<OwnProps, StateProps, DispatchProps>({
   mapStateToProps: (state) => ({
-    favoriteSessions: state.data.favorites
+    favoriteQuestions: state.data.favorites
   }),
   mapDispatchToProps: ({
     addFavorite,
     removeFavorite
   }),
-  component: SessionList
+  component: QuestionList
 });

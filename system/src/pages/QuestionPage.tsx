@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react';
 import { IonToolbar, IonContent, IonPage, IonButtons, IonTitle, IonMenuButton, IonSegment, IonSegmentButton, IonButton, IonIcon, IonSearchbar, IonRefresher, IonRefresherContent, IonToast, IonModal, IonHeader, getConfig } from '@ionic/react';
 import { options, search } from 'ionicons/icons';
 
-import SessionList from '../components/SessionList';
+import SessionList from '../components/QuestionList';
 import SessionListFilter from '../components/SessionListFilter';
 import './QuestionPage.scss'
 
@@ -11,7 +11,7 @@ import ShareSocialFab from '../components/ShareSocialFab';
 
 import * as selectors from '../data/selectors';
 import { connect } from '../data/connect';
-import { setSearchText } from '../data/sessions/sessions.actions';
+import { setSearchText } from '../data/questions/questions.actions';
 import { Question } from '../models/Questions';
 
 interface OwnProps { }

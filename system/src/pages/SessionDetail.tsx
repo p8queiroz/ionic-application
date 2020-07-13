@@ -5,7 +5,7 @@ import { withRouter, RouteComponentProps } from 'react-router';
 import * as selectors from '../data/selectors';
 import { starOutline, star, share, cloudDownload } from 'ionicons/icons';
 import './SessionDetail.scss';
-import { addFavorite, removeFavorite } from '../data/sessions/sessions.actions';
+import { addFavorite, removeFavorite } from '../data/questions/questions.actions';
 import { Question } from '../models/Questions';
 
 interface OwnProps extends RouteComponentProps { };

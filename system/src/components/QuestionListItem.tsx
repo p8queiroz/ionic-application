@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { IonItemSliding, IonItem, IonLabel, IonItemOptions, IonItemOption, AlertButton, IonNote } from '@ionic/react';
 import { Question } from '../models/Questions';
 
-interface SessionListItemProps {
+interface QuestionListItemProps {
   question: Question;
   listType: "all" | "favorites";
   onAddFavorite: (id: number) => void;
@@ -11,14 +11,14 @@ interface SessionListItemProps {
   isFavorite: boolean;
 }
 
-const SessionListItem: React.FC<SessionListItemProps> = ({ isFavorite, onAddFavorite, onRemoveFavorite, onShowAlert, question, listType }) => {
+const QuestionListItem: React.FC<QuestionListItemProps> = ({ isFavorite, onAddFavorite, onRemoveFavorite, onShowAlert, question, listType }) => {
   const ionItemSlidingRef = useRef<HTMLIonItemSlidingElement>(null)
 
   const dismissAlert = () => {
     ionItemSlidingRef.current && ionItemSlidingRef.current.close();
   }
 
-  const removeFavoriteSession = () => {
+  const removeFavorite = () => {
     onAddFavorite(question.id);
     onShowAlert('Favorite already added', [
       {
@@ -35,11 +35,11 @@ const SessionListItem: React.FC<SessionListItemProps> = ({ isFavorite, onAddFavo
     ]);
   }
 
-  const addFavoriteSession = () => {
+  const addFavorite = () => {
     if (isFavorite) {
       // woops, they already favorited it! What shall we do!?
       // prompt them to remove it
-      removeFavoriteSession();
+      removeFavorite();
     } else {
       // remember this session as a user favorite
       onAddFavorite(question.id);
@@ -66,11 +66,11 @@ const SessionListItem: React.FC<SessionListItemProps> = ({ isFavorite, onAddFavo
       </IonItem>
       <IonItemOptions>
         {listType === "favorites" ?
-          <IonItemOption color="danger" onClick={() => removeFavoriteSession()}>
+          <IonItemOption color="danger" onClick={() => removeFavorite()}>
             Remove
           </IonItemOption>
           :
-          <IonItemOption color="favorite" onClick={addFavoriteSession}>
+          <IonItemOption color="favorite" onClick={addFavorite}>
             Favorite
           </IonItemOption>
         }
@@ -79,4 +79,4 @@ const SessionListItem: React.FC<SessionListItemProps> = ({ isFavorite, onAddFavo
   );
 };
 
-export default React.memo(SessionListItem);
+export default React.memo(QuestionListItem);

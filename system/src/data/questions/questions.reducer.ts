@@ -1,5 +1,5 @@
-import { SessionsActions } from './sessions.actions';
-import { ConfState } from './conf.state';
+import { SessionsActions } from './questions.actions';
+import { ConfState } from './questions.state';
 
 export const sessionsReducer = (state: ConfState, action: SessionsActions): ConfState => {
   switch (action.type) {

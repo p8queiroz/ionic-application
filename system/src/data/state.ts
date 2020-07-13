@@ -1,5 +1,5 @@
 import { combineReducers } from './combineReducers';
-import { sessionsReducer } from './sessions/sessions.reducer';
+import { sessionsReducer } from './questions/questions.reducer';
 import { userReducer } from './user/user.reducer';
 
 export const initialState: AppState = {

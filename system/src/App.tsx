@@ -24,7 +24,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { connect } from './data/connect';
 import { AppContextProvider } from './data/AppContext';
-import { loadConfData } from './data/sessions/sessions.actions';
+import { loadConfData } from './data/questions/questions.actions';
 import { setIsLoggedIn, setUsername, loadUserData } from './data/user/user.actions';
 
 import { Question } from "./models/Questions";
