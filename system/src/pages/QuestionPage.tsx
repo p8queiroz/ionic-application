@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react';
 import { IonToolbar, IonContent, IonPage, IonButtons, IonTitle, IonMenuButton, IonSegment, IonSegmentButton, IonButton, IonIcon, IonSearchbar, IonRefresher, IonRefresherContent, IonToast, IonModal, IonHeader, getConfig } from '@ionic/react';
 import { options, search } from 'ionicons/icons';
 
-import SessionList from '../components/QuestionList';
+import QuestionList from '../components/QuestionList';
 import SessionListFilter from '../components/SessionListFilter';
 import './QuestionPage.scss'
 
@@ -121,13 +121,12 @@ const QuestionPage: React.FC<QuestionPageProps> = ({ favoritesQuestions, questio
           onDidDismiss={() => setShowCompleteToast(false)}
         />
 
-        <SessionList
+        <QuestionList
           questions={questions}
           listType={segment}
           hide={segment === 'favorites'}
         />
-        <SessionList
-          // schedule={schedule}
+        <QuestionList
           questions={favoritesQuestions}
           listType={segment}
           hide={segment === 'all'}

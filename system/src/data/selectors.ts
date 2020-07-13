@@ -41,11 +41,9 @@ export const getSearchedQuestions = createSelector(
     if (!searchText) {
       return questions;
     }
-    return questions;
+    return questions.filter(s => s.description.toLowerCase().indexOf(searchText.toLowerCase()) > -1);
   }
 )
-
-
 
 export const getQuestionList = createSelector(
   getSearchedQuestions,
@@ -55,11 +53,10 @@ export const getQuestionList = createSelector(
 export const favoritesQuestions = createSelector(
   getQuestionList, getFavoriteIds,
   (questions, favoriteIds) => {
-
-    return questions;
+    const favquestions = questions.filter(s => favoriteIds.indexOf(s.id) > -1)
+    return favquestions;
   }
 );
-
 
 export const mapCenter = (state: AppState) => {
   const item = state.data.locations.find(l => l.id === state.data.mapCenterId);

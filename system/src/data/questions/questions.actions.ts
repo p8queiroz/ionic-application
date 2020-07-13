@@ -1,6 +1,6 @@
 import { getConfData } from '../dataApi';
 import { ActionType } from '../../util/types';
-import { ConfState } from './questions.state';
+import { QuestionState } from './questions.state';
 
 export const loadConfData = () => async (dispatch: React.Dispatch<any>) => {
   dispatch(setLoading(true));
@@ -14,19 +14,19 @@ export const setLoading = (isLoading: boolean) => ({
   isLoading
 } as const);
 
-export const setData = (data: Partial<ConfState>) => ({
+export const setData = (data: Partial<QuestionState>) => ({
   type: 'set-conf-data',
   data
 } as const);
 
-export const addFavorite = (sessionId: number) => ({
+export const addFavorite = (questionId: number) => ({
   type: 'add-favorite',
-  sessionId
+  questionId
 } as const);
 
-export const removeFavorite = (sessionId: number) => ({
+export const removeFavorite = (questionId: number) => ({
   type: 'remove-favorite',
-  sessionId
+  questionId
 } as const);
 
 export const updateFilteredTracks = (filteredTracks: string[]) => ({
@@ -44,7 +44,7 @@ export const setMenuEnabled = (menuEnabled: boolean) => ({
   menuEnabled
 } as const);
 
-export type SessionsActions =
+export type QuestionsActions =
   | ActionType<typeof setLoading>
   | ActionType<typeof setData>
   | ActionType<typeof addFavorite>

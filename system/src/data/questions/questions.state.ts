@@ -2,7 +2,7 @@ import { Location } from '../../models/Location';
 import { Speaker } from '../../models/Speaker';
 import { Question, Session } from '../../models/Questions';
 
-export interface ConfState {
+export interface QuestionState {
   questions: Question[];
   sessions: Session[];
   speakers: Speaker[];
