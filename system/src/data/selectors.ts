@@ -6,8 +6,7 @@ const getQuestions = (state: AppState) => {
   return state.data.questions
 };
 export const getSpeakers = (state: AppState) => state.data.speakers;
-const getSessions = (state: AppState) => state.data.sessions;
-const getFilteredTracks = (state: AppState) => state.data.filteredTracks;
+const getFilteredTechs = (state: AppState) => state.data.filteredTechs;
 const getFavoriteIds = (state: AppState) => state.data.favorites;
 const getSearchText = (state: AppState) => state.data.searchText;
 
@@ -23,15 +22,17 @@ export const getQuestion = createSelector(
   }
 );
 
-
 export const getFilteredQuestions = createSelector(
-  getQuestions, getFilteredTracks,
-  (questions, filteredTracks) => {
-    const groups: ScheduleGroup[] = [];
-
-    //
-
-    return questions;
+  getQuestions, getFilteredTechs,
+  (questions, filteredTechs) => {
+    if (filteredTechs.length === 0) return questions;
+    const filteedQuestions: Question[] = [];
+    questions.forEach(question => {
+      if (filteredTechs.indexOf(question.technology) > -1) {
+        filteedQuestions.push(question);
+      }
+    })
+    return filteedQuestions;
   }
 );
 

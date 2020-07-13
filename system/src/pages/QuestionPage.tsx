@@ -4,7 +4,7 @@ import { IonToolbar, IonContent, IonPage, IonButtons, IonTitle, IonMenuButton, I
 import { options, search } from 'ionicons/icons';
 
 import QuestionList from '../components/QuestionList';
-import SessionListFilter from '../components/SessionListFilter';
+import QuestionListFilter from '../components/QuestionListFilter';
 import './QuestionPage.scss'
 
 import ShareSocialFab from '../components/ShareSocialFab';
@@ -140,7 +140,7 @@ const QuestionPage: React.FC<QuestionPageProps> = ({ favoritesQuestions, questio
         presentingElement={pageRef.current!}
         cssClass="session-list-filter"
       >
-        <SessionListFilter
+        <QuestionListFilter
           onDismissModal={() => setShowFilterModal(false)}
         />
       </IonModal>

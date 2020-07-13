@@ -38,15 +38,16 @@ export const getConfData = async () => {
   //const speakers = responseData.speakers as Speaker[];
   const locations = await response[1].json() as Location[];
 
-  /*const allTracks = sessions
-    .reduce((all, session) => all.concat(session.tracks), [] as string[])
-    .filter((trackName, index, array) => array.indexOf(trackName) === index)
-    .sort();*/
+  const allTechs = questions
+    .reduce((all, question) => all.concat(question.technology), [] as string[])
+    .filter((technology, index, array) => array.indexOf(technology) === index)
+    .sort();
 
   const data = {
     questions,
     // sessions,
     locations,
+    allTechs,
     //  speakers,
     // allTracks,
     // filteredTracks: [...allTracks]

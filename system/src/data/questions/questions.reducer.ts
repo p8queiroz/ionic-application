@@ -15,8 +15,8 @@ export const sessionsReducer = (state: QuestionState, action: QuestionsActions):
     case 'remove-favorite': {
       return { ...state, favorites: [...(state.favorites).filter(x => x !== action.questionId)] };
     }
-    case 'update-filtered-tracks': {
-      return { ...state, filteredTracks: action.filteredTracks };
+    case 'update-filtered-techs': {
+      return { ...state, filteredTechs: action.filteredTechs };
     }
     case 'set-search-text': {
       return { ...state, searchText: action.searchText };

@@ -9,8 +9,8 @@ export const initialState: AppState = {
     speakers: [],
     favorites: [],
     locations: [],
-    allTracks: [],
-    filteredTracks: [],
+    filteredTechs: [],
+    allTechs: [],
     mapCenterId: 0,
     loading: false,
     menuEnabled: true

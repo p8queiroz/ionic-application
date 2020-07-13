@@ -29,9 +29,9 @@ export const removeFavorite = (questionId: number) => ({
   questionId
 } as const);
 
-export const updateFilteredTracks = (filteredTracks: string[]) => ({
-  type: 'update-filtered-tracks',
-  filteredTracks
+export const updateFiltered = (filteredTechs: string[]) => ({
+  type: 'update-filtered-techs',
+  filteredTechs
 } as const);
 
 export const setSearchText = (searchText?: string) => ({
@@ -49,6 +49,6 @@ export type QuestionsActions =
   | ActionType<typeof setData>
   | ActionType<typeof addFavorite>
   | ActionType<typeof removeFavorite>
-  | ActionType<typeof updateFilteredTracks>
+  | ActionType<typeof updateFiltered>
   | ActionType<typeof setSearchText>
   | ActionType<typeof setMenuEnabled>

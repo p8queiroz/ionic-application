@@ -503,42 +503,18 @@
       "lng": -89.38335
     }
   ],
-  "tracks": [
+  "technologies": [
     {
       "name": "Angular",
       "icon": "logo-angular"
-    },
-    {
-      "name": "Documentation",
-      "icon": "document"
-    },
-    {
-      "name": "Food",
-      "icon": "restaurant"
     },
     {
       "name": "Ionic",
       "icon": "logo-ionic"
     },
     {
-      "name": "Tooling",
-      "icon": "hammer"
-    },
-    {
-      "name": "Design",
-      "icon": "color-palette"
-    },
-    {
       "name": "Services",
       "icon": "cog"
-    },
-    {
-      "name": "Workshop",
-      "icon": "construct"
-    },
-    {
-      "name": "Communication",
-      "icon": "call"
     },
     {
       "name": "Navigation",

@@ -8,10 +8,10 @@ export interface QuestionState {
   speakers: Speaker[];
   favorites: number[];
   locations: Location[];
-  filteredTracks: string[];
+  filteredTechs: string[];
   searchText?: string;
   mapCenterId?: number;
   loading?: boolean;
-  allTracks: string[];
+  allTechs: string[];
   menuEnabled: boolean;
 }

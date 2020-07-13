@@ -2,58 +2,56 @@ import React from 'react';
 
 import { getMode } from '@ionic/core';
 import { IonHeader, IonToolbar, IonButtons, IonButton, IonTitle, IonContent, IonList, IonListHeader, IonItem, IonLabel, IonCheckbox, IonFooter, IonIcon } from '@ionic/react';
-import { logoAngular, call, document, logoIonic, hammer, restaurant, cog, colorPalette, construct, compass } from 'ionicons/icons';
+import { logoAngular, logoNodejs, logoJavascript, micSharp, logoIonic, logoReact, cog, colorPalette } from 'ionicons/icons';
 
-import './SessionListFilter.css'
+import './QuestionListFilter.css'
 
 import { connect } from '../data/connect';
-import { updateFilteredTracks } from '../data/questions/questions.actions';
+import { updateFiltered } from '../data/questions/questions.actions';
 
 interface OwnProps {
   onDismissModal: () => void;
 }
 
 interface StateProps {
-  allTracks: string[],
-  filteredTracks: string[]
+  allTechnologies: string[],
+  filteredTechnologies: string[]
 }
 
 interface DispatchProps {
-  updateFilteredTracks: typeof updateFilteredTracks;
+  updateFiltered: typeof updateFiltered;
 }
 
-type SessionListFilterProps = OwnProps & StateProps & DispatchProps;
+type QuestionListFilterProps = OwnProps & StateProps & DispatchProps;
 
-const SessionListFilter: React.FC<SessionListFilterProps> = ({ allTracks, filteredTracks, onDismissModal, updateFilteredTracks }) => {
+const QuestionListFilter: React.FC<QuestionListFilterProps> = ({ allTechnologies, filteredTechnologies, onDismissModal, updateFiltered }) => {
   const ios = getMode() === 'ios';
 
-  const toggleTrackFilter = (track: string) => {
-    if (filteredTracks.indexOf(track) > -1) {
-      updateFilteredTracks(filteredTracks.filter(x => x !== track));
+  const toggleFilter = (tech: string) => {
+    if (filteredTechnologies.indexOf(tech) > -1) {
+      updateFiltered(filteredTechnologies.filter(x => x !== tech));
     } else {
-      updateFilteredTracks([...filteredTracks, track]);
+      updateFiltered([...filteredTechnologies, tech]);
     }
   };
 
   const handleDeselectAll = () => {
-    updateFilteredTracks([]);
+    updateFiltered([]);
   };
 
   const handleSelectAll = () => {
-    updateFilteredTracks([...allTracks]);
+    updateFiltered([...allTechnologies]);
   };
 
   const iconMap: { [key: string]: any } = {
-    'Angular': logoAngular,
-    'Documentation': document,
-    'Food': restaurant,
-    'Ionic': logoIonic,
-    'Tooling': hammer,
-    'Design': colorPalette,
-    'Services': cog,
-    'Workshop': construct,
-    'Navigation': compass,
-    'Communication': call
+    'js': logoJavascript,
+    'react': logoReact,
+    'c#': micSharp,
+    'angular': logoAngular,
+    'ionic': logoIonic,
+    'design': colorPalette,
+    'services': cog,
+    'nodejs': logoNodejs
   }
 
   return (
@@ -70,7 +68,7 @@ const SessionListFilter: React.FC<SessionListFilterProps> = ({ allTracks, filter
           </IonButtons>
 
           <IonTitle>
-            Filter Sessions
+            Filter XXXX
           </IonTitle>
 
           <IonButtons slot="end">
@@ -81,19 +79,19 @@ const SessionListFilter: React.FC<SessionListFilterProps> = ({ allTracks, filter
 
       <IonContent>
         <IonList lines={ios ? 'inset' : 'full'}>
-          <IonListHeader>Tracks</IonListHeader>
+          <IonListHeader>Technologies</IonListHeader>
 
-          {allTracks.map((track, index) => (
-            <IonItem key={track}>
+          {allTechnologies.map((tech, index) => (
+            <IonItem key={tech}>
               {ios &&
-                <IonIcon slot="start" icon={iconMap[track]} color="medium" />
+                <IonIcon slot="start" icon={iconMap[tech]} color="medium" />
               }
-              <IonLabel>{track}</IonLabel>
+              <IonLabel>{tech}</IonLabel>
               <IonCheckbox
-                onClick={() => toggleTrackFilter(track)}
-                checked={filteredTracks.indexOf(track) !== -1}
+                onClick={() => toggleFilter(tech)}
+                checked={filteredTechnologies.indexOf(tech) !== -1}
                 color="primary"
-                value={track}
+                value={tech}
               ></IonCheckbox>
             </IonItem>
           ))}
@@ -118,11 +116,11 @@ const SessionListFilter: React.FC<SessionListFilterProps> = ({ allTracks, filter
 
 export default connect<OwnProps, StateProps, DispatchProps>({
   mapStateToProps: (state) => ({
-    allTracks: state.data.allTracks,
-    filteredTracks: state.data.filteredTracks
+    allTechnologies: state.data.allTechs,
+    filteredTechnologies: state.data.filteredTechs
   }),
   mapDispatchToProps: {
-    updateFilteredTracks
+    updateFiltered
   },
-  component: SessionListFilter
+  component: QuestionListFilter
 })
