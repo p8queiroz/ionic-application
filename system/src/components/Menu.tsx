@@ -2,7 +2,7 @@ import React from 'react';
 import { RouteComponentProps, withRouter, useLocation } from 'react-router';
 
 import { IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonToggle } from '@ionic/react';
-import { newspaperOutline, hammer, moonOutline, help, informationCircleOutline, logIn, logOut, mapOutline, peopleOutline, person, personAdd } from 'ionicons/icons';
+import { newspaperOutline, hammer, moonOutline, help, informationCircleOutline, logIn, logOut, mapOutline, iceCream, person, personAdd } from 'ionicons/icons';
 
 import { connect } from '../data/connect';
 import { setDarkMode } from '../data/user/user.actions';
@@ -19,7 +19,8 @@ const routes = {
   loggedInPages: [
     { title: 'Account', path: '/account', icon: person },
     { title: 'Support', path: '/support', icon: help },
-    { title: 'Logout', path: '/logout', icon: logOut }
+    { title: 'Logout', path: '/logout', icon: logOut },
+    { title: 'Quiz', path: '/quiz', icon: iceCream }
   ],
   loggedOutPages: [
     { title: 'Login', path: '/login', icon: logIn },
