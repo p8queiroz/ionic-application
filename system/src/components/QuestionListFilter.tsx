@@ -68,7 +68,7 @@ const QuestionListFilter: React.FC<QuestionListFilterProps> = ({ allTechnologies
           </IonButtons>
 
           <IonTitle>
-            Filter XXXX
+            Filters
           </IonTitle>
 
           <IonButtons slot="end">

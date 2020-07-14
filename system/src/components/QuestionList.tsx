@@ -50,7 +50,7 @@ const QuestionList: React.FC<QuestionListProps> = ({ addFavorite, removeFavorite
         <IonItemGroup>
           <IonItemDivider sticky>
             <IonLabel>
-              Quizzer App_
+              Quizzer App
             </IonLabel>
           </IonItemDivider>
           {questions.map((question: Question, questionIndex: number) => (
