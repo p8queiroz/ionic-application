@@ -7,65 +7,8 @@ import './QuizPage.scss';
 import { connect } from '../data/connect';
 import { RouteComponentProps } from 'react-router';
 import { IonCard, IonCardHeader, IonItem, IonLabel, IonAvatar, IonCardContent, IonList } from '@ionic/react';
-import { ReactVideoPlay, VideoSourceType } from 'react-video-play';
 
-let src = [
-  {
-    name: '1080p',
-    source: [{
-      source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4',
-      type: VideoSourceType.video_mp4
-    }, {
-      source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm',
-      type: VideoSourceType.video_webm
-    }, {
-      source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv',
-      type: VideoSourceType.video_ogg
-    }]
-  }, {
-    name: '720p',
-    default: true,
-    source: [{
-      source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.mp4',
-      type: VideoSourceType.video_mp4
-    }, {
-      source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.webm',
-      type: VideoSourceType.video_webm
-    }, {
-      source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.ogv',
-      type: VideoSourceType.video_ogg
-    }, {
-      source: 'http://easyhtml5video.com/assets/video/new/Penguins_of_Madagascar.m4v',
-      type: VideoSourceType.video_mp4
-    }]
-  }
-];
 
-let slides = [{
-  img: "http://lorempixel.com/100/75/people/",
-  link: "http://video.egorov.pw",
-}, {
-  img: "http://lorempixel.com/100/75/city/",
-  link: "http://video.egorov.pw",
-}, {
-  img: "http://lorempixel.com/100/75/nature/",
-  link: "http://video.egorov.pw",
-}, {
-  img: "http://lorempixel.com/100/75/transport/",
-  link: "http://video.egorov.pw",
-}, {
-  img: "http://lorempixel.com/100/75/business/",
-  link: "http://video.egorov.pw",
-}, {
-  img: "http://lorempixel.com/100/75/nightlife/",
-  link: "http://video.egorov.pw",
-}, {
-  img: "http://lorempixel.com/100/75/food/",
-  link: "http://video.egorov.pw",
-}, {
-  img: "http://lorempixel.com/100/75/cats/",
-  link: "http://video.egorov.pw",
-},];
 
 interface OwnProps extends RouteComponentProps { };
 
