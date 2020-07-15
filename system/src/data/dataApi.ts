@@ -1,7 +1,7 @@
 import { Plugins } from '@capacitor/core';
 import { Question } from '../models/Questions';
-//import { Speaker } from '../models/Speaker';
 import { Location } from '../models/Location';
+import { UserViewModel } from './user/user.state';
 
 const { Storage } = Plugins;
 
@@ -11,31 +11,27 @@ const locationsUrl = '/assets/data/locations.json';
 const HAS_LOGGED_IN = 'hasLoggedIn';
 const HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
 const USERNAME = 'username';
+const EMAIL = 'email';
+const TOKEN = 'token';
 
 const requestInit = {
   method: 'POST',
 }
-
 
 export const getQuestions = async () => {
   const getQuestionsURL = `http://quizzertech.com/system/wp-json/application-api/v1/om-question`;
   return fetch(getQuestionsURL);
 }
 
-export const getConfData = async () => {
+export const getAppData = async () => {
   const response = await Promise.all([
     fetch(dataUrl),
     fetch(locationsUrl),
     getQuestions(),
   ]);
-  const responseData = await response[0].json();
+
   const responseDataQuestions = await response[2].json();
-
-  //const questions = responseData.questions[0] as Questions;
   const questions = responseDataQuestions as Question[];
-
-  //const sessions = parseSessions(questions);
-  //const speakers = responseData.speakers as Speaker[];
   const locations = await response[1].json() as Location[];
 
   const allTechs = questions
@@ -45,12 +41,8 @@ export const getConfData = async () => {
 
   const data = {
     questions,
-    // sessions,
     locations,
     allTechs,
-    //  speakers,
-    // allTracks,
-    // filteredTracks: [...allTracks]
   }
 
   return data;
@@ -60,14 +52,18 @@ export const getUserData = async () => {
   const response = await Promise.all([
     Storage.get({ key: HAS_LOGGED_IN }),
     Storage.get({ key: HAS_SEEN_TUTORIAL }),
-    Storage.get({ key: USERNAME })]);
+    Storage.get({ key: USERNAME }),
+    Storage.get({ key: EMAIL })]);
   const isLoggedin = await response[0].value === 'true';
   const hasSeenTutorial = await response[1].value === 'true';
   const username = await response[2].value || undefined;
+  const email = await response[3].value || undefined;
+
   const data = {
     isLoggedin,
     hasSeenTutorial,
-    username
+    username,
+    email
   }
   return data;
 }
@@ -88,10 +84,38 @@ export const setUsernameData = async (username?: string) => {
   }
 }
 
+export const setUserTokenData = async (token?: string) => {
+  debugger;
+  if (!token) {
+    await Storage.remove({ key: TOKEN });
+  } else {
+    await Storage.set({ key: TOKEN, value: token });
+  }
+}
+
+export const setUserEmailData = async (email?: string) => {
+  debugger;
+  if (!email) {
+    await Storage.remove({ key: EMAIL });
+  } else {
+    await Storage.set({ key: EMAIL, value: email });
+  }
+}
+
+
 export const setLogarUsuarioData = async (userName: string, password: string) => {
   const login = `http://quizzertech.com/system/wp-json/jwt-auth/v1/token?username=${userName}&password=${password}`;
   const response = await Promise.all([
     fetch(login, requestInit)]);
+  debugger;
+  const responseData = await response[0].json();
+  return responseData;
+}
+
+export const setUserData = async (user: UserViewModel) => {
+  const register = `http://quizzertech.com/system/wp-json/application-api/v1/user/?username=${user.username}&email=${user.email}&password=${user.password}`;
+  const response = await Promise.all([
+    fetch(register, requestInit)]);
   const responseData = await response[0].json();
   return responseData;
 }
