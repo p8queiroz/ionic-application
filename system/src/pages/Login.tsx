@@ -56,7 +56,7 @@ const Login: React.FC<LoginProps> = ({ setIsLoggedIn, history, setUsername: setU
       <IonContent>
 
         <div className="login-logo">
-          <img src="assets/img/logo512.png" alt="Quizzer Logo" />
+          <img src="assets/img/logo512.png" alt="Quizzer Tech Logo" />
         </div>
 
         <form noValidate onSubmit={login}>
