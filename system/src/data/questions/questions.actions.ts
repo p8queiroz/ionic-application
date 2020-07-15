@@ -1,10 +1,10 @@
-import { getConfData } from '../dataApi';
+import { getAppData } from '../dataApi';
 import { ActionType } from '../../util/types';
 import { QuestionState } from './questions.state';
 
 export const loadConfData = () => async (dispatch: React.Dispatch<any>) => {
   dispatch(setLoading(true));
-  const data = await getConfData();
+  const data = await getAppData();
   dispatch(setData(data));
   dispatch(setLoading(false));
 }
