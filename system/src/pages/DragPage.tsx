@@ -3,10 +3,10 @@ import { IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonButton, IonS
 import { arrowForward } from 'ionicons/icons';
 import { setMenuEnabled } from '../data/questions/questions.actions';
 import { setHasSeenTutorial } from '../data/user/user.actions';
-import './ChatPage.scss';
+import './DragPage.scss';
 import { connect } from '../data/connect';
 import { RouteComponentProps } from 'react-router';
-import Chat from "../components/Chat";
+import DragComponent from '../components/DragComponent';
 
 interface OwnProps extends RouteComponentProps { };
 
@@ -15,9 +15,9 @@ interface DispatchProps {
   setMenuEnabled: typeof setMenuEnabled;
 }
 
-interface TutorialProps extends OwnProps, DispatchProps { };
+interface DragProps extends OwnProps, DispatchProps { };
 
-const ChatPage: React.FC<TutorialProps> = ({ history, setHasSeenTutorial, setMenuEnabled }) => {
+const DragPage: React.FC<DragProps> = ({ history, setHasSeenTutorial, setMenuEnabled }) => {
   const [showSkip, setShowSkip] = useState(true);
   const slideRef = useRef<HTMLIonSlidesElement>(null);
 
@@ -36,7 +36,7 @@ const ChatPage: React.FC<TutorialProps> = ({ history, setHasSeenTutorial, setMen
   };
 
   return (
-    <IonPage id="chat-page">
+    <IonPage id="drag-page">
       <IonHeader no-border>
         <IonToolbar>
           <IonButtons slot="end">
@@ -49,7 +49,7 @@ const ChatPage: React.FC<TutorialProps> = ({ history, setHasSeenTutorial, setMen
         <IonSlides ref={slideRef} onIonSlideWillChange={handleSlideChangeStart} pager={false}>
 
           <IonSlide>
-            <Chat></Chat>
+            <DragComponent></DragComponent>
           </IonSlide>
 
           <IonSlide>
@@ -71,5 +71,5 @@ export default connect<OwnProps, {}, DispatchProps>({
     setHasSeenTutorial,
     setMenuEnabled
   }),
-  component: ChatPage
+  component: DragPage
 });

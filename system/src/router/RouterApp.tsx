@@ -10,7 +10,9 @@ import Signup from '../pages/Signup';
 import Support from '../pages/Support';
 import Tutorial from '../pages/Tutorial';
 import HomeOrTutorial from '../components/HomeOrTutorial';
+import DragPage from "../pages/DragPage";
 import ChatPage from "../pages/ChatPage";
+
 
 import QuizPage from "../pages/QuizPage";
 
@@ -37,6 +39,7 @@ const RouterApp: React.FC<RouterAppProps> = ({ setIsLoggedIn, setUsername }) => 
             <Route path="/tutorial" component={Tutorial} />
             <Route path="/quiz" component={QuizPage} />
             <Route path="/chat" component={ChatPage} />
+            <Route path="/drag" component={DragPage} />
             <Route path="/logout" render={() => {
                 setIsLoggedIn(false);
                 setUsername(undefined);
