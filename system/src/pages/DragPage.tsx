@@ -7,6 +7,7 @@ import './DragPage.scss';
 import { connect } from '../data/connect';
 import { RouteComponentProps } from 'react-router';
 import DragComponent from '../components/DragComponent';
+import Draggable from '../components/DragAndDrop/Draggable';
 
 interface OwnProps extends RouteComponentProps { };
 
@@ -46,10 +47,13 @@ const DragPage: React.FC<DragProps> = ({ history, setHasSeenTutorial, setMenuEna
       </IonHeader>
       <IonContent fullscreen>
 
-        <IonSlides ref={slideRef} onIonSlideWillChange={handleSlideChangeStart} pager={false}>
+        {/*<IonSlides ref={slideRef} onIonSlideWillChange={handleSlideChangeStart} pager={false}>
 
-          <IonSlide>
-            <DragComponent></DragComponent>
+        <IonSlide>*/}
+
+
+        <Draggable></Draggable>
+        {/*
           </IonSlide>
 
           <IonSlide>
@@ -61,6 +65,7 @@ const DragPage: React.FC<DragProps> = ({ history, setHasSeenTutorial, setMenuEna
             </IonButton>
           </IonSlide>
         </IonSlides>
+*/}
       </IonContent>
     </IonPage>
   );
